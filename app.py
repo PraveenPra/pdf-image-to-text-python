@@ -8,6 +8,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'output'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
 # Specify the path to the Tesseract executable
 pytesseract.pytesseract.tesseract_cmd = r'E:\CustumInstallPrograms\OrcTesseractInstall\tesseract.exe'
@@ -29,7 +30,7 @@ def pdf_to_images(pdf_path, output_dir):
         text = ocr_image(image_path)
         text_path = os.path.join(output_dir, f'page_{i}.txt')
         save_text(text, text_path)
-        pages_data.append((image_path, text))
+        pages_data.append((f'page_{i}.png', text))
 
     return pages_data
 
@@ -59,7 +60,7 @@ def upload_file():
 
 @app.route('/output/<filename>')
 def output_file(filename):
-    return send_from_directory(OUTPUT_FOLDER, filename)
+    return send_from_directory(app.config['OUTPUT_FOLDER'], filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

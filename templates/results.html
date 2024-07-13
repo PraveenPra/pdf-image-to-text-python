@@ -10,9 +10,10 @@
     <div>
       <h2>Page {{ loop.index }}</h2>
       <img
-        src="{{ url_for('output_file', filename=image_path.split('/')[-1]) }}"
+        src="{{ url_for('output_file', filename=image_path) }}"
         alt="Page Image"
       />
+      <!-- <img src="/output/page_0.png" alt="Page Image" /> -->
       <pre>{{ text }}</pre>
     </div>
     {% endfor %}
