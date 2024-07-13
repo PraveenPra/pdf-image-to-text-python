@@ -1,0 +1,10 @@
+In a new folder run : python -m venv venv
+to create a virtual env
+
+To activate venv : venv\Scripts\activate
+
+To exit venv : deactivate
+
+To create requirements.txt file : pip freeze > requirements.txt
+
+To install pakages from requirements.txt : pip install -r requirements.txt
