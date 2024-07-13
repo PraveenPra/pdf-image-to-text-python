@@ -56,7 +56,7 @@ def upload_file():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
         pages_data = pdf_to_images(file_path, OUTPUT_FOLDER)
-        return render_template('results.html', pages_data=pages_data)
+        return render_template('upload.html', pages_data=pages_data)
 
 @app.route('/output/<filename>')
 def output_file(filename):

@@ -10,5 +10,22 @@
       <input type="file" name="file" />
       <input type="submit" value="Upload" />
     </form>
+
+    <h1>Conversion Results</h1>
+    {% for image_path, text in pages_data %}
+    <h2>Page {{ loop.index }}</h2>
+    <div style="display: flex">
+      <div style="flex: 1">
+        <img
+          src="{{ url_for('output_file', filename=image_path) }}"
+          alt="Page Image"
+        />
+        <!-- <img src="/output/page_0.png" alt="Page Image" /> -->
+      </div>
+      <div style="flex: 1">
+        <pre>{{ text }}</pre>
+      </div>
+    </div>
+    {% endfor %}
   </body>
 </html>
