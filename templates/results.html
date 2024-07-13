@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Conversion Results</title>
+  </head>
+  <body>
+    <h1>Conversion Results</h1>
+    {% for image_path, text in pages_data %}
+    <div>
+      <h2>Page {{ loop.index }}</h2>
+      <img
+        src="{{ url_for('output_file', filename=image_path.split('/')[-1]) }}"
+        alt="Page Image"
+      />
+      <pre>{{ text }}</pre>
+    </div>
+    {% endfor %}
+  </body>
+</html>
