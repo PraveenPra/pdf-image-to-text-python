@@ -128,4 +128,6 @@ cython_debug/
 .vscode/
 
 # Tesseract OCR output images
-output/*.png
+# output/*.png
+output/*
+uploads/*

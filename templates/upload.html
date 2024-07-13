@@ -3,27 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>Upload PDF</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
   </head>
   <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/uploadForm">Upload</a>
+    </nav>
     <h1>Upload PDF to Convert to Images and Text</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" />
-      <input type="submit" value="Upload" />
+    <form
+      action="/upload"
+      method="post"
+      enctype="multipart/form-data"
+      class="upload-form"
+    >
+      <label for="file-upload" class="file-label"
+        >Choose a PDF/Image file:</label
+      >
+      <input type="file" id="file-upload" name="file" class="file-input" />
+
+      <button type="submit" class="upload-button">Upload</button>
     </form>
 
     <h1>Conversion Results</h1>
     {% for image_path, text in pages_data %}
-    <h2>Page {{ loop.index }}</h2>
-    <div style="display: flex">
-      <div style="flex: 1">
-        <img
-          src="{{ url_for('output_file', filename=image_path) }}"
-          alt="Page Image"
-        />
-        <!-- <img src="/output/page_0.png" alt="Page Image" /> -->
-      </div>
-      <div style="flex: 1">
-        <pre>{{ text }}</pre>
+    <div class="page-container">
+      <h2>Page {{ loop.index }}</h2>
+      <div class="content-wrapper">
+        <div class="image-wrapper">
+          <img
+            src="{{ url_for('output_file', filename=image_path) }}"
+            alt="Page Image"
+          />
+        </div>
+        <div class="text-wrapper">
+          <pre>{{ text }}</pre>
+        </div>
       </div>
     </div>
     {% endfor %}

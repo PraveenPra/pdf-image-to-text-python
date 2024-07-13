@@ -41,7 +41,7 @@ def save_text(text, output_path):
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(text)
 
-@app.route('/')
+@app.route('/uploadForm')
 def upload_form():
     return render_template('upload.html')
 
@@ -61,6 +61,19 @@ def upload_file():
 @app.route('/output/<filename>')
 def output_file(filename):
     return send_from_directory(app.config['OUTPUT_FOLDER'], filename)
+
+
+@app.route('/')
+def home():
+    page_texts = []
+    for filename in os.listdir(OUTPUT_FOLDER):
+        if filename.endswith('.txt'):
+            text_path = os.path.join(OUTPUT_FOLDER, filename)
+            with open(text_path, 'r', encoding='utf-8') as f:
+                text = f.read()
+            page_texts.append({'image_path': filename.replace('.txt', '.png'), 'text': text})
+
+    return render_template('index.html', page_texts=page_texts)
 
 if __name__ == '__main__':
     app.run(debug=True)

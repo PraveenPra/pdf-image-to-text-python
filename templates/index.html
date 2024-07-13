@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home Page</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/uploadForm">Upload</a>
+    </nav>
+    <h1>Existing Pages and Text</h1>
+    {% for page_text in page_texts %}
+    <div class="page-container">
+      <h2>Page {{ loop.index }}</h2>
+      <div class="content-wrapper">
+        <div class="image-wrapper">
+          <img
+            src="{{ url_for('output_file', filename=page_text['image_path']) }}"
+            alt="Page Image"
+          />
+        </div>
+        <div class="text-wrapper">
+          <pre>{{ page_text['text'] }}</pre>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </body>
+</html>
